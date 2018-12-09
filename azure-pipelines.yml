@@ -21,42 +21,42 @@ steps:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+#- script: |
+  #  echo Add other tasks to build, test, and deploy your project.
+  #  echo See https://aka.ms/yaml
+  #displayName: 'Run a multi-line script'
 
-  - script: python -m pip install --upgrade pip setuptools wheel
-  displayName: 'Install tools'
+  #- script: python -m pip install --upgrade pip setuptools wheel
+  #displayName: 'Install tools'
 
-  - script: |
-    python -m pip install flake8
-    flake8 .
-  displayName: 'Run lint tests'
+  #- script: |
+  #  python -m pip install flake8
+   # flake8 .
+  #displayName: 'Run lint tests'
 
-- bash: echo "##vso[task.prependpath]/usr/share/miniconda/bin"
-  displayName: Add conda to PATH
+#- bash: echo "##vso[task.prependpath]/usr/share/miniconda/bin"
+ # displayName: Add conda to PATH
 
-- bash: conda create --yes --quiet --name myEnvironment python=$PYTHON_VERSION # [other packages ...]
-  displayName: Create Anaconda environment
-  - bash: |
-    source activate myEnvironment
-    pytest -m unit --junitxml=junit/unit-test.xml
-  displayName: 'Unit tests'
+#- bash: conda create --yes --quiet --name myEnvironment python=$PYTHON_VERSION # [other packages ...]
+#  displayName: Create Anaconda environment
+ # - bash: |
+ #   source activate myEnvironment
+  #  pytest -m unit --junitxml=junit/unit-test.xml
+  #displayName: 'Unit tests'
 
-- bash: |
-    source activate myEnvironment
-    pytest -m integration --junitxml=junit/integration-test.xml
-  displayName: 'Integration tests'
+#- bash: |
+#    source activate myEnvironment
+#    pytest -m integration --junitxml=junit/integration-test.xml
+ # displayName: 'Integration tests'
   
-  - task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFiles: '**/test-*.xml'
-    testRunTitle: 'Publish test results for Python $(python.version)'
+  #- task: PublishTestResults@2
+ # condition: succeededOrFailed()
+ # inputs:
+  #  testResultsFiles: '**/test-*.xml'
+  #  testRunTitle: 'Publish test results for Python $(python.version)'
 
-    - task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+   # - task: PublishCodeCoverageResults@1
+  #inputs:
+   # codeCoverageTool: Cobertura
+   # summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+   # reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
