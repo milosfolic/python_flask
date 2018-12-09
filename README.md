@@ -1,1 +1,1 @@
-Python Flask app for testnig purposes
+Python Flask app for testing purposes
